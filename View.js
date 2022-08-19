@@ -9,9 +9,9 @@ class View {
   async showMenu(topicsMenu) {
     return new Promise((resolve, rejects) => {
       this.read.question(`Выберите темы из списка:\n${topicsMenu.join('\n')}.\nНапиши цифру\n`, (answer) => {
-        resolve(answer);  
+        resolve(answer);
       })
-    }) 
+    })
   }
 
   async showQuestion(question) {
@@ -26,9 +26,9 @@ class View {
     this.read.close();
   }
 
-  showTopics(topicsMenu){
-    console.log(topicsMenu);// rl выводит на экран меню и потом дожидается ответа пользователя и далееююю
-  }
+  // showTopics(topicsMenu) {
+  //   console.log(topicsMenu);// rl выводит на экран меню и потом дожидается ответа пользователя и далееююю
+  // }
 }
 
 module.exports = View

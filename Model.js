@@ -2,13 +2,14 @@ const fs = require("fs").promises;
 
 class Model {
   constructor() {
-
+    this.topicsMenu = ['1. Ночные ястребы', '2. Выдра', '3. Еноты'];
     this.topics = [];
     this.answers = []; //this.answersFromFile(topic)
     this.questions = []; //this.questionsFromFile(topic)
     // this.questionsAndAnswers = this.questionsFromFile(topic)
-    this.allQA = [];
-    this.score = 0
+    this.score = 0;
+    this.choosenNumber = 0;
+    this.answersAll = [];
   }
 
   async fillTopics() {
@@ -31,56 +32,19 @@ class Model {
     return arrayOfAnswers;
   }
 
-  async countscore(answersAll){
-      let counter = await (await this.answers.filter((el, index) => el == await answersAll[index])).length
-      this.score = counter
+  async countscore(arrRigthRes, arrResults) {
+      const counter = arrRigthRes.filter((el, index) => el === arrResults[index]).length;
+      this.score = counter;
   }
 
-  async qAndA() {
-    this.allQA  =  await this.questions.map((el, i) => {
-      return {el: this.answers[i]};
-      });
-  }
+  // async qAndA() {
+  //   this.allQA  =  await this.questions.map((el, i) => {
+  //     return {el: this.answers[i]};
+  //     });
+  // }
 
 
 }
 
 
-
-//Тест 1
-
-// const newModul = new Model()
-// newModul.fsAsyncFunctionReadFile('nighthawk_flashcard_data.txt')
-// .then((data)=> {
-//  const arr = data.split('\n')
-//  return arr
-// })
-// // .then((arr)=>{return Promise.all(arr)})
-// // .then((arr)=>console.log(arr))
-// .then((arr)=>{
-//   const sr = arr.filter((el,id)=> id % 3 === 0)
-//   return sr
-// })
-// .then((arr)=>console.log(arr))
-
-//Тест 2
-// const newModul = new Model()
-// newModul.arrayQandA('nighthawk_flashcard_data.txt')
-// .then((data)=>console.log(data))
-
-//Тест 3
-// const newModul = new Model()
-// newModul.questionsFromFile('nighthawk_flashcard_data.txt')
-// .then((data)=> console.log(data))
-
-//Тест 4
-const newModul = new Model()
-
-// newModul.createAllTogether(newModul.questions, newModul.answers).then((data) => console.log(data))
-
-
-// newModul.fillTopics().then((data) => console.log(data + 'first'))
-// newModul.fillAnswers('nighthawk_flashcard_data.txt').then((data) => console.log(data + 'sec'))
-// newModul.fillQuestions('nighthawk_flashcard_data.txt').then((data) => console.log(data + 'third'))
-// newModul.qAndA().then((data) => console.log(data + '4'))
 module.exports = Model;
