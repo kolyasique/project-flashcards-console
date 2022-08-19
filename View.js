@@ -1,7 +1,5 @@
 const readline = require('readline');
 const { stdin: input, stdout: output } = require('process');
-const { resolve } = require('path');
-const { rejects } = require('assert');
 
 class View {
   constructor() {
@@ -10,22 +8,23 @@ class View {
 
   async showMenu(topicsMenu) {
     return new Promise((resolve, rejects) => {
-      this.read.question(`${topicsMenu}\n`, (answer) => {
+      this.read.question(`Выберите темы из списка:\n${topicsMenu.join('\n')}.\nНапиши цифру\n`, (answer) => {
         resolve(answer);  
-        this.read.close();      
       })
-
     }) 
   }
 
-  // async showAnswer(topicsMenu) {
-  //   const answer = await this.showMenu(topicsMenu)
-  // }
+  async showQuestion(question) {
+    return new Promise((resolve, rejects) => {
+      this.read.question(`${question}\n`, (answer) => {
+        resolve(answer);
+      })
+    })
+  }
 
-
+  close() {
+    this.read.close();
+  }
 }
-
-const view = new View;
-view.showMenu('ljsd').then((data) => console.log(data));
 
 module.exports = View
