@@ -1,10 +1,11 @@
 class Controller {
   constructor(model, view) {
-    this.model = model
-    this.view = view
+    this.model = model;
+    this.view = view;
   }
 
   async run() {
+
     // Просим экземпляр класса модели прочитать папку со всеми темами и составить меню.
     const starterTopics = this.model.topicsMenu;
     const numberAnswer = await this.view.showMenu(starterTopics);
@@ -28,16 +29,7 @@ class Controller {
     console.log(this.model.answersAll);
        
     // this.model.readTopics(this.printTopicsController);
-
   }
-
-  // printTopicsController(topicsMenu) {
-
-  //   // return await this.view.showMenu()
-  // }
-
-
-
 }
 
 module.exports = Controller
