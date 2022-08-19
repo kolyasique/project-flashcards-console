@@ -22,28 +22,22 @@ class Controller {
     for (let i = 0; i < listQuestions.length; i += 1) {
       const answer = await this.view.showQuestion(listQuestions[i]);
       count += 1;
+      if (answer === listAnswers[i]) {
+        console.log('\x1b[32m', 'Правильный ответ!😎');
+      } else {
+        console.log('\x1b[31m', `Ошибочка 🤡 Правильный ответ "${listAnswers[i]}"`);
+      }
       answers.push(answer);
+      console.log('\x1b[0m');
     }
 
     this.model.answersAll = await answers;
-
-    console.log();
-
     const scoreArr = listAnswers.filter((el, index) => el === this.model.answersAll[index]);
-    // console.log(scoreArr.length);
-
-    // const counter = arrRigthRes.filter((el, index) => el === arrResults[index]).length;
-    
-    // console.log(finalScore);
     
     if (count === listQuestions.length) {
       console.log(`Квиз завершён. Ты молодец, ответил правильно аж на ${scoreArr.length} из ${listAnswers.length} вопросов!`)
       this.view.close();
     }
-
-    // console.log(this.model.answersAll);
-       
-    // this.model.readTopics(this.printTopicsController);
   }
 }
 
