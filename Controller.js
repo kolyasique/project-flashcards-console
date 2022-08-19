@@ -26,12 +26,7 @@ class Controller {
     this.model.answersAll = await answers;
 
     console.log(this.model.answersAll);
-    
-
-    
-    
-
-    
+       
     // this.model.readTopics(this.printTopicsController);
 
   }
