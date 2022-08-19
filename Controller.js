@@ -5,26 +5,31 @@ class Controller {
   }
 
   async run() {
-    await this.model.fillTopics();
-    this.view.showTopics(this.createTopicsMenu())
+
     // Просим экземпляр класса модели прочитать папку со всеми темами и составить меню.
-    // Попутно передаем метод контроллера this.printTopicsController,
-    // так как нам нужно отправить сформинованное меню на вывод в экземпляр класса view
-    // после того, как завершится асинхронная операция чтения папки
-    // Здесь this.printTopicsController — является callback'ом  
-    // this.model.readTopics(this.printTopicsController)
-  }
+    const starterTopics = this.model.topicsMenu;
+    const numberAnswer = await this.view.showMenu(starterTopics);
+    this.model.choosenNumber = await numberAnswer;
 
-  printTopicsController(topicsMenu) {
-    // Тут нужно попросить экземпляр класса view вывести меню пользователю, 
-    // а также дождаться ответа последнего
-  }
+    let count = 0;
+    let answers = [];
 
-  createTopicsMenu(){
-    return this.model.topics.map((topic, i) => `${i+1}. ${topic}`).join('\n');
-  }
+    for (let i = 0; i < this.model.allQA.length; i += 1) {
+      const answer = await this.view.showQuestion(this.model.allQA[i].question);
+      count += 1;
+      answers.push(answer);
+    }
+    
+    if (count === 3) {
+      this.view.close();
+    }
 
-  
+    this.model.answersAll = await answers;
+
+    console.log(this.model.answersAll);
+       
+    // this.model.readTopics(this.printTopicsController);
+  }
 }
 
 module.exports = Controller

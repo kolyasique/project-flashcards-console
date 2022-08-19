@@ -2,6 +2,7 @@ const fs = require("fs").promises;
 
 class Model {
   constructor() {
+
     this.topics = [];
     this.answers = []; //this.answersFromFile(topic)
     this.questions = []; //this.questionsFromFile(topic)
@@ -40,6 +41,8 @@ class Model {
       return {el: this.answers[i]};
       });
   }
+
+
 }
 
 
