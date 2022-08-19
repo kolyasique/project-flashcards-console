@@ -2,7 +2,7 @@ const fs = require("fs").promises;
 
 class Model {
   constructor() {
-    this.topicsMenu = ['1. Ночные ястребы', '2. Выдра', '3. Еноты'];
+    this.topicsMenu = ['1. Ночные ястребы', '2. Выдра', '3. Эльбрус', '4. Еноты'];
     this.topics = [];
     this.answers = []; 
     this.questions = []; 
